@@ -2,6 +2,11 @@ import Image from "next/image";
 import Banner from "./components/common/Banner";
 import BannerImageSrc from "../../public/images/lyly_banner.jpg";
 import ProductCard from "./components/ProductCard";
+import { CiDeliveryTruck } from "react-icons/ci";
+import { IoChatbubblesOutline } from "react-icons/io5";
+import { TbHours24 } from "react-icons/tb";
+import { IoIosSwap } from "react-icons/io";
+
 // import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -31,7 +36,7 @@ export default function Home() {
             Sản phẩm được thuê nhiều
           </h2>
 
-          <div className="border-solid border-2 pt-2 pb-2 pr-6 pl-6 rounded-[32px] border-[#003459] text-[#003459] font-semibold hover:cursor">
+          <div className="border-solid border-2 pt-2 pb-2 pr-6 pl-6 rounded-[32px] border-[#003459] text-[#003459] font-medium hover:cursor">
             Xem thêm{" "}
           </div>
         </div>
@@ -56,7 +61,45 @@ export default function Home() {
   };
 
   const renderService = () => {
-    return <div className="min-h-[100px] border-[1px]"></div>;
+    return (
+      <div className="min-h-[100px] py-14">
+        <div className="flex w-[81%] mx-auto justify-around items-stretch">
+          <div className="flex flex-col items-center min-h-2">
+            <CiDeliveryTruck fontSize={"60px"} />
+            <div className="text-[20px] font-medium text-gray-500 mt-3">
+              Vân chuyển nhanh
+            </div>
+          </div>
+
+          <div className="flex flex-col max-h-[200px] pl-[1px] bg-gray-300 border-1 border-black border-solid"></div>
+
+          <div className="flex flex-col items-center min-h-2">
+            <IoChatbubblesOutline fontSize={"60px"} />
+            <div className="text-[20px] font-medium text-gray-500 mt-3">
+              Tư vấn nhiệt tình
+            </div>
+          </div>
+
+          <div className="flex flex-col max-h-[200px] pl-[1px] bg-gray-300 border-1 border-black border-solid"></div>
+
+          <div className="flex flex-col items-center min-h-2">
+            <TbHours24 fontSize={"60px"} />
+            <div className="text-[20px] font-medium text-gray-500 mt-3">
+              Hộ Trợ 24/7
+            </div>
+          </div>
+
+          <div className="flex flex-col max-h-[200px] pl-[1px] bg-gray-300 border-1 border-black border-solid"></div>
+
+          <div className="flex flex-col items-center min-h-2">
+            <IoIosSwap fontSize={"60px"} />
+            <div className="text-[20px] font-medium text-gray-500 mt-3">
+              Đổi & Trả
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
