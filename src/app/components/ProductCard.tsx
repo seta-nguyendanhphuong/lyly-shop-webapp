@@ -1,22 +1,38 @@
 import React from "react";
+import { BsTelephone } from "react-icons/bs";
 
 export default function ProductCard() {
   return (
     <div className="shadow-lg p-1 rounded-xl flex flex-col items-center hover:shadow-xl hover:cursor-pointer">
-      <img
-        src="https://scontent.fhan17-1.fna.fbcdn.net/v/t39.30808-6/469693216_122130925232429925_3317852380809124342_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=f727a1&_nc_eui2=AeEsLuY4eGk7KuUFF0ruyweTAkff-6M9hZ0CR9_7oz2FnZjWb7ApIIoiJpdfQZszz52gYP_4OS_TJ45uUU-Mih7e&_nc_ohc=sBaIAY9n-xEQ7kNvgEKsq6e&_nc_oc=AdgV1FpmVLF4gh3wmqa5xJBZ7erGFSF-ID6yCc1N5ymL1DqApUoKESLlieo9f8Gp1wA&_nc_zt=23&_nc_ht=scontent.fhan17-1.fna&_nc_gid=AIjFaYHu-RHNAOgVFdhwznB&oh=00_AYBOW58W3mvHkR6fhC4wOaM82asJ8yInbyZUtMrTmTrh-Q&oe=676EE499"
-        alt=""
-        className="w-full rounded-[12px]"
-      />
+      <div className="overflow-hidden">
+        <img
+          src="https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/468276844_122128733684429925_4985192768641574527_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=f727a1&_nc_ohc=7P8UzOyBagAQ7kNvgHk1aPT&_nc_zt=23&_nc_ht=scontent.fhan15-1.fna&_nc_gid=ADssnwfp2BXsR-NgknSffHK&oh=00_AYAaaP6hxlfzF4JNrqddQs_HtNZ1vA5KUw2s1ksC8yNzLA&oe=678DBBD6"
+          alt=""
+          className="w-full rounded-[12px] hover:scale-110 transition ease-in-out"
+        />
+      </div>
 
-      <div className="w-full p-3 font-bold ">
-        <h2 className="text-center pb-2 pt-1 text-lg">Áo dài việt nam</h2>
-        <p>
-          <span className="text-rose-700">Giá thuê:</span> 50.000 đ
-        </p>
-        <p>
-          <span className="text-teal-800">Giá bán:</span> Liên hệ
-        </p>
+      <div className="w-full p-3">
+        <h2 className="text-center pb-2 pt-1 text-lg font-bold">
+          Áo dài việt nam
+        </h2>
+        <div className="flex justify-between">
+          <div>
+            <div className="text-sm font-medium text-gray-500">Giá bán</div>
+            <div className="text-lg font-medium flex items-center">
+              <BsTelephone fontSize={"14px"} />
+              <span className="p-0.5 pt-1 pl-1">Liên hệ</span>
+            </div>
+          </div>
+          <div>
+            <div className="text-sm font-medium text-gray-500 text-right">
+              Giá thuê
+            </div>
+            <div className="font-bold text-xl pt-0.5">
+              50.000<span className="text-sm">đ</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ export function LazyLoadingTable() {
     try {
       // Simulating an API call with setTimeout
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      const newItems: Item[] = Array.from({ length: 10 }, (_, i) => ({
+      const newItems: Item[] = Array.from({ length: 5 }, (_, i) => ({
         id: items.length + i + 1,
         name: `User ${items.length + i + 1}`,
         email: `user${items.length + i + 1}@example.com`
