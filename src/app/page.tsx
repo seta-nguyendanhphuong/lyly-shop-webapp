@@ -46,7 +46,7 @@ export default function Home() {
 
   const renderProducts = () => {
     return (
-      <div className="grid grid-cols-4 gap-[20px]">
+      <div className="grid  xl:grid-cols-4 gap-[20px] lg:grid-cols-3 grid-cols-2">
         <ProductCard />
         <ProductCard />
         <ProductCard />
@@ -107,11 +107,13 @@ export default function Home() {
       {renderBanner()}
 
       {/* Body */}
-      <div className="min-h-[900px] w-[81%] mx-auto">
-        {renderPopularProductIntro()}
-        {renderProducts()}
+      <div className="min-h-[900px] w-full max-w-[1440px] mx-auto">
+        <div className="w-[81%] mx-auto">
+          {renderPopularProductIntro()}
+          {renderProducts()}
+        </div>
+        {renderService()}
       </div>
-      {renderService()}
     </div>
   );
 }

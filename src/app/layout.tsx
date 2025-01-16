@@ -14,7 +14,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-pink w-full">
         <Header />
-        <div className="body_container">
+        <div className="">
           <main>{children}</main>
         </div>
         <Footer />

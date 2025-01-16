@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { IoSearchOutline } from "react-icons/io5";
+import { FaBars } from "react-icons/fa6";
 
 export default function Header() {
   return (
@@ -47,6 +48,10 @@ export default function Header() {
         <div className="">
           <img src="https://flagcdn.com/vn.svg" width="30" alt="" />
         </div>
+      </div>
+
+      <div className="sm:block hidden">
+        <FaBars />
       </div>
     </header>
   );
