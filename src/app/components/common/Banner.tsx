@@ -1,7 +1,7 @@
 import React from "react";
 
 export type BannerProps = {
-  GimgSrc: string;
+  imgSrc: string;
 };
 
 export default function Banner({ imgSrc }: BannerProps) {

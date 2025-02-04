@@ -12,9 +12,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-pink w-full">
+      <body className="w-full bg-white">
         <Header />
-        <div className="">
+        <div>
           <main>{children}</main>
         </div>
         <Footer />
