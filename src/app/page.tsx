@@ -188,7 +188,7 @@ export default function Home() {
       {/* Body */}
       <div className='min-h-[900px] w-full max-w-[1440px] mx-auto'>
         <div className='w-[81%] mx-auto'>
-          {renderPopularProductIntro()}
+          {/* {renderPopularProductIntro()} */}
         </div>
       </div>
       <div className="min-h-[900px] w-full max-w-[1440px] mx-auto">
