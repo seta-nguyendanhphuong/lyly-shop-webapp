@@ -1,11 +1,14 @@
-import Image from 'next/image';
-import Banner from './components/common/Banner';
-import BannerImageSrc from '../../public/images/lyly_banner.jpg';
-import ProductCard from './components/ProductCard';
-import { CiDeliveryTruck } from 'react-icons/ci';
-import { IoChatbubblesOutline } from 'react-icons/io5';
-import { TbHours24 } from 'react-icons/tb';
-import { IoIosSwap } from 'react-icons/io';
+
+"use client";
+import Image from "next/image";
+import Banner from "./components/common/Banner";
+import BannerImageSrc from "../../public/images/lyly_banner.jpg";
+import ProductCard from "./components/ProductCard";
+import { products } from "./product/page";
+import { CiDeliveryTruck } from "react-icons/ci";
+import { IoChatbubblesOutline } from "react-icons/io5";
+import { TbHours24 } from "react-icons/tb";
+import { IoIosSwap } from "react-icons/io";
 import AdvertisementBanner from './components/AdvertisementBanner';
 
 // import { useEffect, useState } from "react";
@@ -29,16 +32,14 @@ export default function Home() {
     );
   };
 
-  const renderPopularProductIntro = () => {
+  const renderTypeProduct = (type: string) => {
     return (
       <>
-        <div className='flex justify-between items-center pt-[30px] pb-[20px]'>
-          <h2 className='font-bold text-2xl text-[#003459]'>
-            Sản phẩm được thuê nhiều
-          </h2>
+        <div className="flex justify-between items-center pt-[30px] pb-[20px]">
+          <h2 className="font-bold text-2xl text-[#003459]">{type}</h2>
 
-          <div className='border-solid border-2 pt-2 pb-2 pr-6 pl-6 rounded-[32px] border-[#003459] text-[#003459] font-medium hover:cursor'>
-            Xem thêm{' '}
+          <div className="border-solid border-2 pt-2 pb-2 pr-6 pl-6 rounded-[32px] border-[#003459] text-[#003459] font-medium hover:cursor">
+            Xem thêm
           </div>
         </div>
       </>
@@ -47,16 +48,10 @@ export default function Home() {
 
   const renderProducts = () => {
     return (
-      <div className='grid xl:grid-cols-4 gap-[20px] lg:grid-cols-3 grid-cols-2'>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+      <div className="grid xl:grid-cols-4 gap-[20px] lg:grid-cols-3 grid-cols-2">
+        {products.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
       </div>
     );
   };
@@ -194,6 +189,17 @@ export default function Home() {
       <div className='min-h-[900px] w-full max-w-[1440px] mx-auto'>
         <div className='w-[81%] mx-auto'>
           {renderPopularProductIntro()}
+        </div>
+      </div>
+      <div className="min-h-[900px] w-full max-w-[1440px] mx-auto">
+        <div className="w-[81%] mx-auto">
+          {renderTypeProduct("Sản phẩm được thuê nhiều")}
+          {renderProducts()}
+        </div>
+      </div>
+      <div className="min-h-[900px] w-full max-w-[1440px] mx-auto">
+        <div className="w-[81%] mx-auto">
+          {renderTypeProduct("Sản phẩm của chúng tôi")}
           {renderProducts()}
           {renderAdvertisement()}
           {renderProducts()}
