@@ -23,7 +23,7 @@ export default function Footer() {
             </div>
 
             <div className="flex min-w-[120px] justify-between items-center flex-col">
-              <a href="">
+              <a href="https://www.facebook.com/profile.php?id=61562897750382">
                 <div className="p-2 rounded-full border-[#fff] border-[1px] hover:bg-orange-600 m-2	">
                   <FaFacebookSquare fontSize={"20px"} color="white" />
                 </div>
