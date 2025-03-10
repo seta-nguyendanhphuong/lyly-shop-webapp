@@ -1,5 +1,4 @@
 
-"use client";
 import Image from "next/image";
 import Banner from "./components/common/Banner";
 import BannerImageSrc from "../../public/images/lyly_banner.jpg";
@@ -13,7 +12,28 @@ import AdvertisementBanner from './components/AdvertisementBanner';
 
 // import { useEffect, useState } from "react";
 
-export default function Home() {
+async function fetchProduct() {
+  const option = {
+    headers: {
+      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`
+    }
+  }
+
+  try {
+    const res = await fetch("http://127.0.0.1:1337/api/products?populate=*", option)
+    const response = await res.json()
+    return response
+    
+  } catch(err) {
+    console.error(err);
+    
+  }
+}
+
+export default async function Home() {
+  const list_product = await fetchProduct()
+  console.log('list_product: ', list_product);
+  
   // const [data, setData] = useState([])
 
   // useEffect(() => {
@@ -28,6 +48,7 @@ export default function Home() {
     return (
       <>
         <Banner imgSrc={BannerImageSrc.src} />
+        {/* <img src={"http://127.0.0.1:1337"+ `${list_product.data[0].productImage[0].url}`} alt="" /> */}
       </>
     );
   };
@@ -186,11 +207,11 @@ export default function Home() {
       {renderBanner()}
 
       {/* Body */}
-      <div className='min-h-[900px] w-full max-w-[1440px] mx-auto'>
+      {/* <div className='min-h-[900px] w-full max-w-[1440px] mx-auto'>
         <div className='w-[81%] mx-auto'>
-          {/* {renderPopularProductIntro()} */}
+          {renderPopularProductIntro()}
         </div>
-      </div>
+      </div> */}
       <div className="min-h-[900px] w-full max-w-[1440px] mx-auto">
         <div className="w-[81%] mx-auto">
           {renderTypeProduct("Sản phẩm được thuê nhiều")}
