@@ -10,6 +10,7 @@ type Product = {
   name: string;
   imageUrl: string;
   rentalPrice: number;
+  // description: string;
 };
 
 export default function ProductDetailPage() {
@@ -25,37 +26,47 @@ export default function ProductDetailPage() {
 
   if (!product) {
     return (
-      <h2 className="text-center text-2xl font-bold">
+      <h2 className="text-center text-2xl font-bold text-gray-600 mt-10">
         Không tìm thấy sản phẩm
       </h2>
     );
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold text-center mb-6">{product.name}</h1>
-      <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
-        {/* Phần ảnh sản phẩm */}
-        <div className="flex-1">
+    <div className="max-w-5xl mx-auto px-6 py-10">
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
+        {product.name}
+      </h1>
+
+      <div className="flex flex-col md:flex-row items-center gap-10">
+        {/* Hình ảnh sản phẩm */}
+        <div className="w-full md:w-1/2 flex justify-center">
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="w-full max-w-[400px] rounded-lg shadow-lg"
+            className="w-full max-w-md rounded-lg shadow-md"
           />
         </div>
 
-        <div className="flex-1 md:ml-6 space-y-4">
-          <div className="md:text-left font-bold text-xl">
-            Giá thuê: {product.rentalPrice.toLocaleString("vi-VN")}đ
-          </div>
-          <div className="flex-1 md:ml-6 space-y-4">
-            <h2 className="md:text-left font-bold text-xl">Mô tả chi tiết:</h2>
-            {/* <p className="mt-2">{product.description}</p> */}
+        {/* Thông tin sản phẩm */}
+        <div className="w-full md:w-1/2 space-y-6">
+          <div className="text-xl font-semibold text-gray-700">
+            Giá thuê:{" "}
+            <span className="text-red-500 font-bold">
+              {product.rentalPrice.toLocaleString("vi-VN")}đ
+            </span>
           </div>
 
-          <div className="text-center mt-6">
+          <div>
+            <h2 className="text-lg font-semibold text-gray-800">
+              Mô tả chi tiết:
+            </h2>
+            {/* <p className="text-gray-600 mt-2">{product.description}</p> */}
+          </div>
+
+          <div className="flex justify-center md:justify-start mt-6">
             <Link href="/contact">
-              <button className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+              <button className="px-6 py-3 bg-[#F27121] text-white font-bold rounded-lg shadow-md hover:opacity-80 transition duration-300">
                 Thuê ngay
               </button>
             </Link>

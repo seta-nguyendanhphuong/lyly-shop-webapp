@@ -5,9 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IoSearchOutline } from "react-icons/io5";
 import { FaBars } from "react-icons/fa6";
+import { useSearch } from "../SearchContext";
 
 export default function Header() {
   const pathname = usePathname();
+  const { searchQuery, setSearchQuery } = useSearch();
 
   const menuItems = [
     { name: "Home", path: "/" },
@@ -49,6 +51,8 @@ export default function Header() {
             type="text"
             placeholder="Search something here!"
             className="rounded-3xl py-1.5 pl-3 pr-10 outline-none text-[14px]"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <div>
