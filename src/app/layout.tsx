@@ -4,20 +4,23 @@ import "./globals.css";
 import "./layout.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
+import { SearchProvider } from "@/app/components/SearchContext";
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className="w-full bg-white">
-        <Header />
-        <div>
-          <main>{children}</main>
-        </div>
-        <Footer />
+        <SearchProvider>
+          <Header />
+          <div>
+            <main>{children}</main>
+          </div>
+          <Footer />
+        </SearchProvider>
       </body>
     </html>
   );

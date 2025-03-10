@@ -1,4 +1,4 @@
-
+"use client";
 import Image from "next/image";
 import Banner from "./components/common/Banner";
 import BannerImageSrc from "../../public/images/lyly_banner.jpg";
@@ -8,7 +8,7 @@ import { CiDeliveryTruck } from "react-icons/ci";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { TbHours24 } from "react-icons/tb";
 import { IoIosSwap } from "react-icons/io";
-import AdvertisementBanner from './components/AdvertisementBanner';
+import AdvertisementBanner from "./components/AdvertisementBanner";
 
 // import { useEffect, useState } from "react";
 
@@ -79,72 +79,72 @@ export default async function Home() {
 
   const renderSponsor = () => {
     return (
-      <div className='min-h-[100px] py-14'>
-        <h1 className='text-center pb-10 text-2xl font-bold text-[#003459]'>
-          Proud to sponsor for{' '}
+      <div className="min-h-[100px] py-14">
+        <h1 className="text-center pb-10 text-2xl font-bold text-[#003459]">
+          Proud to sponsor for{" "}
         </h1>
-        <div className='flex w-[81%] mx-auto justify-around items-stretch'>
+        <div className="flex w-[81%] mx-auto justify-around items-stretch">
           <div>
             <img
-              src='https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png'
-              alt=''
-              width={'65px'}
+              src="https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png"
+              alt=""
+              width={"65px"}
             />
           </div>
 
           <div>
             <img
-              src='https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG'
-              alt=''
-              width={'65px'}
+              src="https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG"
+              alt=""
+              width={"65px"}
             />
           </div>
 
           <div>
             <img
-              src='https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png'
-              alt=''
-              width={'65px'}
+              src="https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png"
+              alt=""
+              width={"65px"}
             />
           </div>
 
           <div>
             <img
-              src='https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG'
-              alt=''
-              width={'65px'}
+              src="https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG"
+              alt=""
+              width={"65px"}
             />
           </div>
 
           <div>
             <img
-              src='https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png'
-              alt=''
-              width={'65px'}
+              src="https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png"
+              alt=""
+              width={"65px"}
             />
           </div>
 
           <div>
             <img
-              src='https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG'
-              alt=''
-              width={'65px'}
+              src="https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG"
+              alt=""
+              width={"65px"}
             />
           </div>
 
           <div>
             <img
-              src='https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png'
-              alt=''
-              width={'65px'}
+              src="https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png"
+              alt=""
+              width={"65px"}
             />
           </div>
 
           <div>
             <img
-              src='https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG'
-              alt=''
-              width={'65px'}
+              src="https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG"
+              alt=""
+              width={"65px"}
             />
           </div>
         </div>
@@ -154,38 +154,38 @@ export default async function Home() {
 
   const renderService = () => {
     return (
-      <div className='min-h-[100px] py-14'>
-        <div className='flex w-[81%] mx-auto justify-around items-stretch'>
-          <div className='flex flex-col items-center min-h-2'>
-            <CiDeliveryTruck fontSize={'60px'} color={'gray'} />
-            <div className='text-[20px] font-medium text-gray-500 mt-3'>
+      <div className="min-h-[100px] py-14">
+        <div className="flex w-[81%] mx-auto justify-around items-stretch">
+          <div className="flex flex-col items-center min-h-2">
+            <CiDeliveryTruck fontSize={"60px"} color={"gray"} />
+            <div className="text-[20px] font-medium text-gray-500 mt-3">
               Vân chuyển nhanh
             </div>
           </div>
 
-          <div className='flex flex-col max-h-[200px] pl-[1px] bg-gray-300 border-1 border-black border-solid'></div>
+          <div className="flex flex-col max-h-[200px] pl-[1px] bg-gray-300 border-1 border-black border-solid"></div>
 
-          <div className='flex flex-col items-center min-h-2'>
-            <IoChatbubblesOutline fontSize={'60px'} color={'gray'} />
-            <div className='text-[20px] font-medium text-gray-500 mt-3'>
+          <div className="flex flex-col items-center min-h-2">
+            <IoChatbubblesOutline fontSize={"60px"} color={"gray"} />
+            <div className="text-[20px] font-medium text-gray-500 mt-3">
               Tư vấn nhiệt tình
             </div>
           </div>
 
-          <div className='flex flex-col max-h-[200px] pl-[1px] bg-gray-300 border-1 border-black border-solid'></div>
+          <div className="flex flex-col max-h-[200px] pl-[1px] bg-gray-300 border-1 border-black border-solid"></div>
 
-          <div className='flex flex-col items-center min-h-2'>
-            <TbHours24 fontSize={'60px'} color={'gray'} />
-            <div className='text-[20px] font-medium text-gray-500 mt-3'>
+          <div className="flex flex-col items-center min-h-2">
+            <TbHours24 fontSize={"60px"} color={"gray"} />
+            <div className="text-[20px] font-medium text-gray-500 mt-3">
               Hộ Trợ 24/7
             </div>
           </div>
 
-          <div className='flex flex-col max-h-[200px] pl-[1px] bg-gray-300 border-1 border-black border-solid'></div>
+          <div className="flex flex-col max-h-[200px] pl-[1px] bg-gray-300 border-1 border-black border-solid"></div>
 
-          <div className='flex flex-col items-center min-h-2'>
-            <IoIosSwap fontSize={'60px'} color={'gray'} />
-            <div className='text-[20px] font-medium text-gray-500 mt-3'>
+          <div className="flex flex-col items-center min-h-2">
+            <IoIosSwap fontSize={"60px"} color={"gray"} />
+            <div className="text-[20px] font-medium text-gray-500 mt-3">
               Đổi & Trả
             </div>
           </div>
@@ -196,7 +196,7 @@ export default async function Home() {
 
   const renderAdvertisement = () => {
     return (
-      <div className='my-10'>
+      <div className="my-10">
         <AdvertisementBanner />
       </div>
     );
