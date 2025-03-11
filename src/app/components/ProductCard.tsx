@@ -4,18 +4,22 @@ import Link from "next/link";
 interface ProductProps {
   id: string;
   name: string;
-  imageUrl: string;
-  price: number;
-  rentalPrice: number;
+  productImage: string;
+  productRetailPrice?: number;
+  productRentalPrice?: number;
 }
 
 export default function ProductCard({
   id,
   name,
-  imageUrl,
-  price,
-  rentalPrice,
+  productImage,
+  productRetailPrice,
+  productRentalPrice,
 }: ProductProps) {
+  const imageUrl = productImage.startsWith("http")
+    ? productImage
+    : `http://127.0.0.1:1337${productImage}`;
+
   return (
     <Link href={`/product/${id}`} className="block">
       <div className="shadow-lg p-1 rounded-xl flex flex-col items-center hover:shadow-xl hover:cursor-pointer">
@@ -33,16 +37,15 @@ export default function ProductCard({
             <div>
               <div className="text-sm font-medium text-gray-500">Giá bán</div>
               <div className="text-lg font-medium flex items-center">
-                {price ? `${price.toLocaleString("vi-VN")}đ` : "Liên hệ"}
+                {`${productRetailPrice?.toLocaleString("vi-VN")} đ`}
               </div>
             </div>
             <div>
               <div className="text-sm font-medium text-gray-500 text-right">
                 Giá thuê
               </div>
-              <div className="font-bold text-xl pt-0.5">
-                {rentalPrice.toLocaleString("vi-VN")}
-                <span className="text-sm">đ</span>
+              <div className="text-lg font-medium flex items-center">
+                {`${productRentalPrice?.toLocaleString("vi-VN")} đ`}
               </div>
             </div>
           </div>

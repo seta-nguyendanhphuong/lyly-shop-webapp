@@ -1,36 +1,18 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
-import { useState } from "react";
 import { useSearch } from "@/app/components/SearchContext";
+import { fetchProduct } from "@/app/components/FetchProduct";
 
 interface Product {
   id: string;
   name: string;
-  imageUrl: string;
-  price: number;
-  rentalPrice: number;
-  category: string;
+  productImage: { url: string }[];
+  productRetailPrice: number;
+  productRentalPrice: number;
+  productCategory: string;
 }
-
-export const products: Product[] = [
-  {
-    id: "1",
-    name: "Áo dài Việt Nam",
-    imageUrl: "/images/aodai.jpg",
-    price: 300000,
-    rentalPrice: 50000,
-    category: "aodai",
-  },
-  {
-    id: "2",
-    name: "Vest Nam",
-    imageUrl: "/images/vest.jpg",
-    price: 600000,
-    rentalPrice: 100000,
-    category: "vest",
-  },
-];
 
 const categories: string[] = ["Tất cả", "aodai", "vest", "dahoi"];
 const sortOptions = [
@@ -41,15 +23,43 @@ const sortOptions = [
 ];
 
 export default function Products() {
+  const [listProduct, setListProduct] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("Tất cả");
   const [sortOption, setSortOption] = useState<string>("");
   const { searchQuery } = useSearch();
 
+  // **Fetch sản phẩm từ API**
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const response = await fetchProduct();
+        if (response?.data) {
+          setListProduct(
+            response.data.map((item: any) => ({
+              id: item.id,
+              name: item.name,
+              productImage: item.productImage || [],
+              productRentalPrice: item.productRentalPrice,
+              productRetailPrice: item.productRetailPrice,
+              productCategory: item.productCategory,
+            }))
+          );
+        }
+      } catch (error) {
+        console.error("Lỗi khi fetch sản phẩm:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
   // **Lọc sản phẩm theo danh mục & tìm kiếm**
-  let filteredProducts = products.filter(
+  let filteredProducts = listProduct.filter(
     (product) =>
       (selectedCategory === "Tất cả" ||
-        product.category === selectedCategory) &&
+        product.productCategory === selectedCategory) &&
       product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -58,14 +68,13 @@ export default function Products() {
     filteredProducts = [...filteredProducts].sort((a, b) => {
       switch (sortOption) {
         case "price-asc":
-          return a.price - b.price;
+          return a.productRetailPrice - b.productRetailPrice;
         case "price-desc":
-          return b.price - a.price;
+          return b.productRetailPrice - a.productRetailPrice;
         case "rental-asc":
-          return a.rentalPrice - b.rentalPrice;
+          return a.productRentalPrice - b.productRentalPrice;
         case "rental-desc":
-          return b.rentalPrice - a.rentalPrice;
-
+          return b.productRentalPrice - a.productRentalPrice;
         default:
           return 0;
       }
@@ -111,17 +120,30 @@ export default function Products() {
       </div>
 
       {/* Hiển thị sản phẩm */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <ProductCard key={product.id} {...product} />
-          ))
-        ) : (
-          <p className="text-center text-gray-500 col-span-full">
-            Không tìm thấy sản phẩm.
-          </p>
-        )}
-      </div>
+      {loading ? (
+        <p className="text-center text-gray-500">Đang tải sản phẩm...</p>
+      ) : filteredProducts.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filteredProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              productImage={
+                product.productImage.length > 0
+                  ? `http://127.0.0.1:1337${product.productImage[0].url}`
+                  : "/default-image.jpg"
+              }
+              productRetailPrice={product.productRetailPrice}
+              productRentalPrice={product.productRentalPrice}
+            />
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-gray-500 col-span-full">
+          Không tìm thấy sản phẩm.
+        </p>
+      )}
     </div>
   );
 }
