@@ -4,15 +4,7 @@ import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import { useSearch } from "@/app/components/SearchContext";
 import { fetchProduct } from "@/app/components/FetchProduct";
-
-interface Product {
-  id: string;
-  name: string;
-  productImage: { url: string }[];
-  productRetailPrice: number;
-  productRentalPrice: number;
-  productCategory: string;
-}
+import { Product } from "@/app/types/product";
 
 const categories: string[] = ["Tất cả", "aodai", "vest", "dahoi"];
 const sortOptions = [

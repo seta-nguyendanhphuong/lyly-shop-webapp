@@ -11,15 +11,7 @@ import { IoIosSwap } from "react-icons/io";
 import AdvertisementBanner from "./components/AdvertisementBanner";
 import { fetchProduct } from "@/app/components/FetchProduct";
 import Link from "next/link";
-
-type Product = {
-  id: string;
-  name: string;
-  productImage: { url: string }[];
-  productRetailPrice: number;
-  productRentalPrice: number;
-  productCategory: string;
-};
+import { Product } from "@/app/types/product";
 
 export default function Home() {
   const [listProduct, setListProduct] = useState<Product[]>([]);

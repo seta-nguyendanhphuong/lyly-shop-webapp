@@ -1,7 +1,8 @@
 export async function fetchProduct() {
+  const api_token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
   const option = {
     headers: {
-      Authorization: `Bearer bfe8274dcc995e17dcf4a9acb0024f12cb19a5d1bf80cfabf4f8dc419fee8388f3112577e437246696be8d3d24b8cb503e74131dcc290d15dc3e74dfe8df3686f1fa7d45b6978e7360a4186d60196463e40e3c5a554f87da540156f26ca8d0dc2b07b37d366c4ad4edc0c1d1b66ca180f030b6ab9cea3ad792f08fe53faaf716`,
+      Authorization: `Bearer ${api_token}`,
     },
   };
 
@@ -14,5 +15,27 @@ export async function fetchProduct() {
     return response;
   } catch (err) {
     console.error(err);
+  }
+}
+
+export async function fetchProductById(id: string) {
+  const api_token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+
+  const options = {
+    headers: {
+      Authorization: `Bearer ${api_token}`,
+    },
+  };
+
+  try {
+    const res = await fetch(
+      `http://127.0.0.1:1337/api/products/${id}?populate=*`,
+      options
+    );
+    const response = await res.json();
+    return response?.data;
+  } catch (err) {
+    console.error("Lỗi khi fetch sản phẩm theo ID:", err);
+    return null;
   }
 }
