@@ -6,7 +6,6 @@ import { useSearch } from "@/app/components/SearchContext";
 import { fetchProduct } from "@/app/components/FetchProduct";
 import { Product } from "@/app/types/product";
 
-const categories: string[] = ["Tất cả", "aodai", "vest", "dahoi"];
 const sortOptions = [
   { value: "price-asc", label: "Giá bán: Thấp → Cao" },
   { value: "price-desc", label: "Giá bán: Cao → Thấp" },
@@ -16,6 +15,7 @@ const sortOptions = [
 
 export default function Products() {
   const [listProduct, setListProduct] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<string[]>(["Tất cả"]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>("Tất cả");
   const [sortOption, setSortOption] = useState<string>("");
@@ -27,16 +27,29 @@ export default function Products() {
       try {
         const response = await fetchProduct();
         if (response?.data) {
-          setListProduct(
-            response.data.map((item: any) => ({
-              id: item.id,
-              name: item.name,
-              productImage: item.productImage || [],
-              productRentalPrice: item.productRentalPrice,
-              productRetailPrice: item.productRetailPrice,
-              productCategory: item.productCategory,
-            }))
-          );
+          const products = response.data.map((item: any) => ({
+            id: item.id,
+            name: item.name,
+            productImage: item.productImage || [],
+            productRentalPrice: item.productRentalPrice,
+            productRetailPrice: item.productRetailPrice,
+            productCategory: item.productCategory,
+          }));
+
+          setListProduct(products);
+
+          // **Lấy danh mục duy nhất từ sản phẩm**
+          const uniqueCategories: string[] = [
+            "Tất cả",
+            ...Array.from(
+              new Set(
+                listProduct
+                  .map((p: Product) => p.productCategory)
+                  .filter(Boolean)
+              )
+            ),
+          ];
+          setCategories(uniqueCategories);
         }
       } catch (error) {
         console.error("Lỗi khi fetch sản phẩm:", error);
@@ -47,6 +60,7 @@ export default function Products() {
 
     loadProducts();
   }, []);
+
   // **Lọc sản phẩm theo danh mục & tìm kiếm**
   let filteredProducts = listProduct.filter(
     (product) =>

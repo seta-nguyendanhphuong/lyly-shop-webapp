@@ -51,7 +51,7 @@ export default function Home() {
     return (
       <div className="flex justify-between items-center pt-[30px] pb-[20px]">
         <h2 className="font-bold text-2xl text-[#003459]">{type}</h2>
-        <Link href="/products">
+        <Link href="/product">
           <div className="border-solid border-2 px-6 py-2 rounded-[32px] border-[#003459] text-[#003459] font-medium cursor-pointer hover:bg-[#003459] hover:text-white transition">
             Xem thêm
           </div>
