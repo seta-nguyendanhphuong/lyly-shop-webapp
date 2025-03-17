@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import { useSearch } from "@/app/components/SearchContext";
 import { fetchProduct } from "@/app/components/FetchProduct";
+import { fetchCategories } from "@/app/components/FetchCategories";
 import { Product } from "@/app/types/product";
 
 const sortOptions = [
@@ -15,17 +16,43 @@ const sortOptions = [
 
 export default function Products() {
   const [listProduct, setListProduct] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<string[]>(["Tất cả"]);
+  const [categories, setCategories] = useState<{ id: number; name: string }[]>(
+    []
+  );
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<string>("Tất cả");
+  const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const [sortOption, setSortOption] = useState<string>("");
   const { searchQuery } = useSearch();
+
+  // **Fetch danh mục từ API**
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const response = await fetchCategories();
+        console.log("Danh mục API:", response);
+
+        if (response?.data) {
+          const categoryList = response.data.map((c: any) => ({
+            id: c.id,
+            name: c.name,
+          }));
+          setCategories([{ id: 0, name: "Tất cả" }, ...categoryList]);
+        }
+      } catch (error) {
+        console.error("Lỗi khi fetch danh mục:", error);
+      }
+    };
+
+    loadCategories();
+  }, []);
 
   // **Fetch sản phẩm từ API**
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const response = await fetchProduct();
+        console.log("Sản phẩm API:", response);
+
         if (response?.data) {
           const products = response.data.map((item: any) => ({
             id: item.id,
@@ -33,23 +60,11 @@ export default function Products() {
             productImage: item.productImage || [],
             productRentalPrice: item.productRentalPrice,
             productRetailPrice: item.productRetailPrice,
-            productCategory: item.productCategory,
+            productCategory:
+              item.categories.length > 0 ? item.categories[0].id : 0,
           }));
 
           setListProduct(products);
-
-          // **Lấy danh mục duy nhất từ sản phẩm**
-          const uniqueCategories: string[] = [
-            "Tất cả",
-            ...Array.from(
-              new Set(
-                listProduct
-                  .map((p: Product) => p.productCategory)
-                  .filter(Boolean)
-              )
-            ),
-          ];
-          setCategories(uniqueCategories);
         }
       } catch (error) {
         console.error("Lỗi khi fetch sản phẩm:", error);
@@ -64,7 +79,7 @@ export default function Products() {
   // **Lọc sản phẩm theo danh mục & tìm kiếm**
   let filteredProducts = listProduct.filter(
     (product) =>
-      (selectedCategory === "Tất cả" ||
+      (selectedCategory === 0 ||
         product.productCategory === selectedCategory) &&
       product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -98,15 +113,15 @@ export default function Products() {
         <div className="flex gap-2 flex-wrap">
           {categories.map((category) => (
             <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
               className={`px-4 py-2 rounded-lg text-lg transition-all ${
-                selectedCategory === category
+                selectedCategory === category.id
                   ? "bg-[#F27121] text-white"
                   : "bg-gray-200"
               }`}
             >
-              {category}
+              {category.name}
             </button>
           ))}
         </div>
@@ -147,7 +162,7 @@ export default function Products() {
         </div>
       ) : (
         <p className="text-center text-gray-500 col-span-full">
-          Không tìm thấy sản phẩm.
+          Không có sản phẩm trong danh mục này.
         </p>
       )}
     </div>

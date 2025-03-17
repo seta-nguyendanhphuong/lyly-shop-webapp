@@ -4,6 +4,6 @@ export type Product = {
   productImage: { url: string }[];
   productRetailPrice: number;
   productRentalPrice: number;
-  productCategory: string;
+  productCategory: number;
   productDescription?: string; // Optional nếu có
 };
