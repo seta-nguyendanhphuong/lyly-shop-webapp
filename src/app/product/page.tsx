@@ -23,6 +23,9 @@ export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const [sortOption, setSortOption] = useState<string>("");
   const { searchQuery } = useSearch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 12;
 
   // **Fetch danh mục từ API**
   useEffect(() => {
@@ -49,8 +52,9 @@ export default function Products() {
   // **Fetch sản phẩm từ API**
   useEffect(() => {
     const loadProducts = async () => {
+      setLoading(true);
       try {
-        const response = await fetchProduct();
+        const response = await fetchProduct(currentPage, pageSize);
         console.log("Sản phẩm API:", response);
 
         if (response?.data) {
@@ -65,6 +69,7 @@ export default function Products() {
           }));
 
           setListProduct(products);
+          setTotalPages(response.meta.pagination.pageCount); // Lưu tổng số trang
         }
       } catch (error) {
         console.error("Lỗi khi fetch sản phẩm:", error);
@@ -74,7 +79,7 @@ export default function Products() {
     };
 
     loadProducts();
-  }, []);
+  }, [currentPage]);
 
   // **Lọc sản phẩm theo danh mục & tìm kiếm**
   let filteredProducts = listProduct.filter(
@@ -165,6 +170,35 @@ export default function Products() {
           Không có sản phẩm trong danh mục này.
         </p>
       )}
+      <div className="flex justify-center mt-6 gap-4">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className={`px-4 py-2 rounded-lg ${
+            currentPage === 1 ? "bg-gray-300" : "bg-[#F27121] text-white"
+          }`}
+        >
+          Trang trước
+        </button>
+
+        <span className="px-4 py-2 bg-gray-200 rounded-lg">
+          Trang {currentPage} / {totalPages}
+        </span>
+
+        <button
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
+          disabled={currentPage === totalPages}
+          className={`px-4 py-2 rounded-lg ${
+            currentPage === totalPages
+              ? "bg-gray-300"
+              : "bg-[#F27121] text-white"
+          }`}
+        >
+          Trang sau
+        </button>
+      </div>
     </div>
   );
 }

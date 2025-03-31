@@ -1,4 +1,4 @@
-export async function fetchProduct() {
+export async function fetchProduct(page = 1, pageSize = 10) {
   const api_token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
   const option = {
     headers: {
@@ -8,7 +8,7 @@ export async function fetchProduct() {
 
   try {
     const res = await fetch(
-      "http://127.0.0.1:1337/api/products?populate=*",
+      `http://127.0.0.1:1337/api/products?populate=*&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
       option
     );
     const response = await res.json();
