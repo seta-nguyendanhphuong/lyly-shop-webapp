@@ -9,7 +9,7 @@ import { IoChatbubblesOutline } from "react-icons/io5";
 import { TbHours24 } from "react-icons/tb";
 import { IoIosSwap } from "react-icons/io";
 import AdvertisementBanner from "./components/AdvertisementBanner";
-import { fetchProduct } from "@/app/components/FetchProduct";
+import { fetchProductHome } from "@/app/components/FetchProduct";
 import Link from "next/link";
 import { Product } from "@/app/types/product";
 
@@ -20,7 +20,7 @@ export default function Home() {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        const response = await fetchProduct();
+        const response = await fetchProductHome();
         if (response?.data) {
           setListProduct(
             response.data.map((item: any) => ({

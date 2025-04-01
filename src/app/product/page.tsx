@@ -3,17 +3,16 @@
 import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import { useSearch } from "@/app/components/SearchContext";
-import { fetchProduct } from "@/app/components/FetchProduct";
-import { fetchCategories } from "@/app/components/FetchCategories";
 import { Product } from "@/app/types/product";
-
-const sortOptions = [
-  { value: "price-asc", label: "Giá bán: Thấp → Cao" },
-  { value: "price-desc", label: "Giá bán: Cao → Thấp" },
-  { value: "rental-asc", label: "Giá thuê: Thấp → Cao" },
-  { value: "rental-desc", label: "Giá thuê: Cao → Thấp" },
-];
-
+import { fetchCategories } from "../components/FetchCategories";
+import { fetchProduct } from "../components/FetchProduct";
+interface FetchProductParams {
+  page: number;
+  pageSize: number;
+  category?: number;
+  search?: string;
+  sort?: string;
+}
 export default function Products() {
   const [listProduct, setListProduct] = useState<Product[]>([]);
   const [categories, setCategories] = useState<{ id: number; name: string }[]>(
@@ -21,19 +20,52 @@ export default function Products() {
   );
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
-  const [sortOption, setSortOption] = useState<string>("");
-  const { searchQuery } = useSearch();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const pageSize = 12;
+  const { searchQuery } = useSearch();
+  const [sortOption, setSortOption] =
+    useState<FetchProductParams["sort"]>(undefined);
 
-  // **Fetch danh mục từ API**
+  const pageSize = 12; // Số sản phẩm mỗi trang
+  const sortProducts = (
+    products: Product[],
+    sortOption: string | undefined
+  ) => {
+    if (!sortOption) return products;
+
+    return [...products].sort((a, b) => {
+      switch (sortOption) {
+        case "productRentalPrice:asc":
+          return a.productRentalPrice - b.productRentalPrice;
+        case "productRentalPrice:desc":
+          return b.productRentalPrice - a.productRentalPrice;
+        case "productRetailPrice:asc":
+          return a.productRetailPrice - b.productRetailPrice;
+        case "productRetailPrice:desc":
+          return b.productRetailPrice - a.productRetailPrice;
+        default:
+          return 0;
+      }
+    });
+  };
+
+  const handleCategoryChange = (categoryId: number) => {
+    setSelectedCategory(categoryId);
+    setCurrentPage(1);
+  };
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value.trim();
+    setSortOption(value === "" ? undefined : value);
+    setCurrentPage(1);
+  };
+
+  // Fetch danh mục
   useEffect(() => {
     const loadCategories = async () => {
       try {
+        console.log("Fetch với sort:", sortOption);
         const response = await fetchCategories();
-        console.log("Danh mục API:", response);
-
         if (response?.data) {
           const categoryList = response.data.map((c: any) => ({
             id: c.id,
@@ -49,27 +81,35 @@ export default function Products() {
     loadCategories();
   }, []);
 
-  // **Fetch sản phẩm từ API**
+  // Fetch sản phẩm từ API, có phân trang, search và sort
   useEffect(() => {
     const loadProducts = async () => {
       setLoading(true);
       try {
-        const response = await fetchProduct(currentPage, pageSize);
-        console.log("Sản phẩm API:", response);
+        const response = await fetchProduct({
+          page: currentPage,
+          pageSize,
+          category: selectedCategory,
+          search: searchQuery || "",
+          sort: sortOption || undefined,
+        });
 
         if (response?.data) {
-          const products = response.data.map((item: any) => ({
+          let products = response.data.map((item) => ({
             id: item.id,
             name: item.name,
             productImage: item.productImage || [],
             productRentalPrice: item.productRentalPrice,
             productRetailPrice: item.productRetailPrice,
-            productCategory:
-              item.categories.length > 0 ? item.categories[0].id : 0,
+            productCategory: item.categories?.[0]?.id || 0,
           }));
-
+          products = sortProducts(products, sortOption);
           setListProduct(products);
-          setTotalPages(response.meta.pagination.pageCount); // Lưu tổng số trang
+          setTotalPages(response.meta.pagination.pageCount);
+          console.log(
+            response.meta.pagination,
+            response.meta.pagination.pageCount
+          );
         }
       } catch (error) {
         console.error("Lỗi khi fetch sản phẩm:", error);
@@ -77,36 +117,8 @@ export default function Products() {
         setLoading(false);
       }
     };
-
     loadProducts();
-  }, [currentPage]);
-
-  // **Lọc sản phẩm theo danh mục & tìm kiếm**
-  let filteredProducts = listProduct.filter(
-    (product) =>
-      (selectedCategory === 0 ||
-        product.productCategory === selectedCategory) &&
-      product.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  // **Sắp xếp sản phẩm**
-  if (sortOption) {
-    filteredProducts = [...filteredProducts].sort((a, b) => {
-      switch (sortOption) {
-        case "price-asc":
-          return a.productRetailPrice - b.productRetailPrice;
-        case "price-desc":
-          return b.productRetailPrice - a.productRetailPrice;
-        case "rental-asc":
-          return a.productRentalPrice - b.productRentalPrice;
-        case "rental-desc":
-          return b.productRentalPrice - a.productRentalPrice;
-        default:
-          return 0;
-      }
-    });
-  }
-
+  }, [currentPage, selectedCategory, searchQuery, sortOption]);
   return (
     <div className="max-w-6xl mx-auto p-4 sm:p-6">
       <h1 className="text-3xl font-bold text-center mb-6">
@@ -119,7 +131,7 @@ export default function Products() {
           {categories.map((category) => (
             <button
               key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
+              onClick={() => handleCategoryChange(category.id)}
               className={`px-4 py-2 rounded-lg text-lg transition-all ${
                 selectedCategory === category.id
                   ? "bg-[#F27121] text-white"
@@ -131,26 +143,26 @@ export default function Products() {
           ))}
         </div>
 
+        {/* Sắp xếp */}
         <select
-          className="border px-4 py-2 rounded-lg"
+          className="px-4 py-2 rounded-lg border bg-white shadow-sm"
           value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
+          onChange={handleSortChange}
         >
-          <option value="">Sắp xếp theo</option>
-          {sortOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
+          <option value="">Mặc định</option>
+          <option value="productRentalPrice:asc">Giá thuê thấp → cao</option>
+          <option value="productRentalPrice:desc">Giá thuê cao → thấp</option>
+          <option value="productRetailPrice:asc">Giá bán thấp → cao</option>
+          <option value="productRetailPrice:desc">Giá bán cao → thấp</option>
         </select>
       </div>
 
       {/* Hiển thị sản phẩm */}
       {loading ? (
         <p className="text-center text-gray-500">Đang tải sản phẩm...</p>
-      ) : filteredProducts.length > 0 ? (
+      ) : listProduct.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredProducts.map((product) => (
+          {listProduct.map((product) => (
             <ProductCard
               key={product.id}
               id={product.id}
@@ -166,37 +178,37 @@ export default function Products() {
           ))}
         </div>
       ) : (
-        <p className="text-center text-gray-500 col-span-full">
+        <p className="text-center text-gray-500">
           Không có sản phẩm trong danh mục này.
         </p>
       )}
-      <div className="flex justify-center mt-6 gap-4">
+
+      {/* Phân trang - Hiển thị luôn cả khi lọc danh mục */}
+      <div className="flex justify-center mt-6">
         <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-          className={`px-4 py-2 rounded-lg ${
+          className={`px-4 py-2 mx-1 rounded-lg ${
             currentPage === 1 ? "bg-gray-300" : "bg-[#F27121] text-white"
           }`}
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
         >
-          Trang trước
+          Trước
         </button>
-
-        <span className="px-4 py-2 bg-gray-200 rounded-lg">
-          Trang {currentPage} / {totalPages}
+        <span className="px-4 py-2 mx-2 text-lg font-bold">
+          {currentPage} / {totalPages}
         </span>
-
         <button
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
-          disabled={currentPage === totalPages}
-          className={`px-4 py-2 rounded-lg ${
+          className={`px-4 py-2 mx-1 rounded-lg ${
             currentPage === totalPages
               ? "bg-gray-300"
               : "bg-[#F27121] text-white"
           }`}
+          disabled={currentPage === totalPages}
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
         >
-          Trang sau
+          Sau
         </button>
       </div>
     </div>
