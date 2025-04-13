@@ -107,7 +107,7 @@ export default function Home() {
       <div className="min-h-[900px] w-full max-w-[1440px] mx-auto">
         <div className="w-[81%] mx-auto">
           {renderTypeProduct("Sản phẩm của chúng tôi")}
-          {renderProducts()}
+          {/* {renderProducts()} */}
           <AdvertisementBanner />
           {renderProducts()}
         </div>
