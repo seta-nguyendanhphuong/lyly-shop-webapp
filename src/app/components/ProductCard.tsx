@@ -1,39 +1,64 @@
-import React from "react";
-import { BsTelephone } from "react-icons/bs";
+"use client";
+import Link from "next/link";
 
-export default function ProductCard() {
+interface ProductProps {
+  id: string;
+  name: string;
+  productImage: string;
+  productRetailPrice?: number;
+  productRentalPrice?: number;
+}
+
+export default function ProductCard({
+  id,
+  name,
+  productImage,
+  productRetailPrice,
+  productRentalPrice,
+}: ProductProps) {
+  const imageUrl = productImage.startsWith("http")
+    ? productImage
+    : `http://127.0.0.1:1337${productImage}`;
+
   return (
-    <div className="shadow-lg p-1 rounded-xl flex flex-col items-center hover:shadow-xl hover:cursor-pointer">
-      <div className="overflow-hidden">
-        <img
-          src="https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-6/468276844_122128733684429925_4985192768641574527_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=f727a1&_nc_ohc=7P8UzOyBagAQ7kNvgHk1aPT&_nc_zt=23&_nc_ht=scontent.fhan15-1.fna&_nc_gid=ADssnwfp2BXsR-NgknSffHK&oh=00_AYAaaP6hxlfzF4JNrqddQs_HtNZ1vA5KUw2s1ksC8yNzLA&oe=678DBBD6"
-          alt=""
-          className="w-full rounded-[12px] hover:scale-110 transition ease-in-out"
-        />
-      </div>
-
-      <div className="w-full p-3">
-        <h2 className="text-center pb-2 pt-1 text-lg font-bold">
-          Áo dài việt nam
-        </h2>
-        <div className="flex justify-between">
-          <div>
-            <div className="text-sm font-medium text-gray-500">Giá bán</div>
-            <div className="text-lg font-medium flex items-center">
-              <BsTelephone fontSize={"14px"} />
-              <span className="p-0.5 pt-1 pl-1">Liên hệ</span>
-            </div>
+    <Link href={`/product/${id}`} className="block">
+      <div className="shadow-lg p-2 rounded-xl flex flex-col items-center hover:shadow-xl hover:cursor-pointer transition-transform transform hover:scale-105 relative overflow-hidden">
+        <div className="relative w-full h-72 flex justify-center items-center bg-gray-100 rounded-[12px] overflow-hidden">
+          <img
+            src={imageUrl}
+            alt={name}
+            className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2 opacity-0 hover:opacity-100 transition-opacity duration-300">
+            Xem chi tiết
           </div>
-          <div>
-            <div className="text-sm font-medium text-gray-500 text-right">
-              Giá thuê
+        </div>
+        <div className="w-full p-3 text-center">
+          <h2 className="pb-2 pt-1 text-lg font-bold">{name}</h2>
+          <div className="flex justify-between text-sm text-gray-600">
+            <div>
+              <span className="block">Giá bán</span>
+              {productRetailPrice ? (
+                <span className="text-lg font-medium text-gray-800">
+                  {`${productRetailPrice.toLocaleString("vi-VN")} đ`}
+                </span>
+              ) : (
+                <span className="text-gray-400">Liên hệ</span>
+              )}
             </div>
-            <div className="font-bold text-xl pt-0.5">
-              50.000<span className="text-sm">đ</span>
+            <div>
+              <span className="block">Giá thuê</span>
+              {productRentalPrice ? (
+                <span className="text-lg font-medium text-gray-800">
+                  {`${productRentalPrice.toLocaleString("vi-VN")} đ`}
+                </span>
+              ) : (
+                <span className="text-gray-400">Liên hệ</span>
+              )}
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
