@@ -34,22 +34,20 @@ export default function About() {
           {/* Key Facts */}
           <section className="mb-16">
             <h2 className="text-3xl font-bold text-center text-red-700 mb-10">
-              IU at a Glance
+              TRANG PHỤC BIỂU DIỄN LY LY
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="bg-gray-50 p-6 rounded-lg shadow-md text-center">
-                <div className="text-4xl font-bold text-red-700 mb-2">1820</div>
-                <p className="text-gray-700">Year Founded</p>
+                <div className="text-4xl font-bold text-red-700 mb-2">2024</div>
+                <p className="text-gray-700">Năm thành lập</p>
               </div>
               <div className="bg-gray-50 p-6 rounded-lg shadow-md text-center">
-                <div className="text-4xl font-bold text-red-700 mb-2">
-                  90,000+
-                </div>
-                <p className="text-gray-700">Students Across All Campuses</p>
+                <div className="text-4xl font-bold text-red-700 mb-2">50+</div>
+                <p className="text-gray-700">Các khách hàng từng thuê</p>
               </div>
               <div className="bg-gray-50 p-6 rounded-lg shadow-md text-center">
                 <div className="text-4xl font-bold text-red-700 mb-2">9</div>
-                <p className="text-gray-700">Campuses Statewide</p>
+                <p className="text-gray-700">Các khách hàng từng thuê</p>
               </div>
             </div>
           </section>
@@ -59,7 +57,7 @@ export default function About() {
             <div className="flex flex-col md:flex-row gap-10 items-center">
               <div className="md:w-1/2">
                 <img
-                  src="https://scontent.fhan17-1.fna.fbcdn.net/v/t39.30808-6/484035618_1969217880269441_2994748902558079928_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEM0Gkj3BPNfqiQLLaqt75kVLd3IDT5LudUt3cgNPku562nmQMgsO0omghyjaImHnXYAju5G7WJQmNXCoXYX8kb&_nc_ohc=tbDMBUee27gQ7kNvwH3OmLy&_nc_oc=AdmRjTh-voU4h5vX2iylsCNBSPPzz7EqmYZ8k8d3HpRahJPP-Njjsr4halzZC14hrVA&_nc_zt=23&_nc_ht=scontent.fhan17-1.fna&_nc_gid=bTdIkEdpm4KhElz2gsAnug&oh=00_AfF-O2RuUEyS7fH9524vvl9UkvzP9LluvsyBPWAJuG04iw&oe=6801CCF9"
+                  src={"/images/Banner_About.jpg"}
                   alt="Historic IU Campus"
                   className="rounded-lg shadow-md w-full h-64 object-cover"
                 />
@@ -69,23 +67,18 @@ export default function About() {
                   Lịch sử hình thành
                 </h2>
                 <p className="text-gray-700 mb-4">
-                  Indiana University was founded in 1820 as the Indiana State
-                  Seminary. It is one of the oldest public universities in the
-                  United States, with a legacy spanning over two centuries of
-                  academic excellence and innovation.
+                  Xuất thân là 1 sinh viên âm nhạc của trường sân khấu điện ảnh.
+                  Tuy nhiên, ngoài âm nhạc, Ly rất quan tâm và có năng khiếu
+                  biên đạo và nhảy múa. Cô ấy cũng đã có nhiều kinh nghiệm biên
+                  đạo ở các trường học, các doanh nghiệp,...
                 </p>
                 <p className="text-gray-700 mb-4">
-                  Throughout our history, we have been at the forefront of
-                  research, arts, and education, producing Nobel laureates,
-                  Pulitzer Prize winners, Olympic medalists, and leaders in
-                  every field.
+                  Sau 1 thời gian dài làm về nghệ thuật, Ly cũng đã mở rộng được
+                  nhiều mối quan hệ. Hơn nữa, mong muốn và sở thích kinh doanh
+                  của cô ấy đã ấp ủ từ rất lâu rồi. Đến tháng 06 năm 2024, với
+                  những khát khao, quyết tâm và sự tìm hiểu, cô ấy đã chính thức
+                  mở shop cho thuê trang phục biểu diễn
                 </p>
-                <a
-                  href="#"
-                  className="text-red-700 font-semibold hover:underline"
-                >
-                  Explore our timeline →
-                </a>
               </div>
             </div>
           </section>
@@ -98,17 +91,8 @@ export default function About() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden">
-                  <img src={avaImage} className="w-full h-full object-cover" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800">
-                  Chủ Shop Xinh Dep
-                </h3>
-                <p className="text-gray-600">Nguyen Huong Ly</p>
-              </div>
-              <div className="text-center">
-                <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden">
                   <img
-                    src="../../../public/images/ava.jpg"
+                    src={"/images/ava.jpg"}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -120,7 +104,19 @@ export default function About() {
               <div className="text-center">
                 <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden">
                   <img
-                    src="/api/placeholder/200/200"
+                    src={"/images/ava.jpg"}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800">
+                  Chủ Shop Xinh Dep
+                </h3>
+                <p className="text-gray-600">Nguyen Huong Ly</p>
+              </div>
+              <div className="text-center">
+                <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden">
+                  <img
+                    src={"/images/ava.jpg"}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -139,17 +135,15 @@ export default function About() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="rounded-lg overflow-hidden shadow-md">
-                <img
-                  src="/api/placeholder/400/300"
-                  alt="Bloomington Campus"
-                  className="w-full h-48 object-cover"
-                />
+                <div className="max-h-400px overflow-hidden">
+                  <img src={"/images/Feedback2.jpg"} />
+                </div>
                 <div className="p-4">
                   <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    Bài viết 1
+                    Polo đoàn sắc xanh của Thanh niên Việt Nam
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    Our flagship campus, home to world-class research and arts.
+                    26/3 Thành lập Đoàn Cộng Sản Hồ Chí Minh
                   </p>
                   <a
                     href="#"
@@ -160,17 +154,16 @@ export default function About() {
                 </div>
               </div>
               <div className="rounded-lg overflow-hidden shadow-md">
-                <img
-                  src="/api/placeholder/400/300"
-                  alt="Indianapolis Campus"
-                  className="w-full h-48 object-cover"
-                />
+                <div className="max-h-400px overflow-hidden">
+                  <img src={"/images/Feedback3.jpg"} />
+                </div>
                 <div className="p-4">
                   <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    Bài viết 2
+                    Áo dài nhà em siêu nhiều
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    Urban campus with strong medical and professional programs.
+                    Những tà áo dài mang cảm từ vẻ đẹp của lá cờ tổ quốc chưa
+                    bao giờ hết hot
                   </p>
                   <a
                     href="#"
@@ -181,17 +174,15 @@ export default function About() {
                 </div>
               </div>
               <div className="rounded-lg overflow-hidden shadow-md">
-                <img
-                  src="/api/placeholder/400/300"
-                  alt="South Bend Campus"
-                  className="w-full h-48 object-cover"
-                />
+                <div className="max-h-400px overflow-hidden">
+                  <img src={"/images/Feedback1.jpg"} />
+                </div>
                 <div className="p-4">
                   <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    Bài viết 3
+                    Trang phục doanh nghiệp đa dạng
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    Serving the northern Indiana region with diverse programs.
+                    Nhà e
                   </p>
                   <a
                     href="#"
