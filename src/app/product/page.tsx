@@ -81,7 +81,6 @@ export default function Products() {
     loadCategories();
   }, []);
 
-  // Fetch sản phẩm từ API, có phân trang, search và sort
   useEffect(() => {
     const loadProducts = async () => {
       setLoading(true);

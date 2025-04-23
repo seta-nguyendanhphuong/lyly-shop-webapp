@@ -68,22 +68,17 @@ export async function fetchProductById(id: string) {
     return null;
   }
 }
-export async function fetchProductHome() {
-  const api_token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
-  const option = {
-    headers: {
-      Authorization: `Bearer ${api_token}`,
-    },
-  };
+export const fetchProductHome = async () => {
+  const query = new URLSearchParams({
+    populate: "*",
+    pagination: JSON.stringify({
+      page: 1,
+      pageSize: 4, // 👈 chỉ lấy 4 sản phẩm đầu tiên
+    }),
+    // sort: JSON.stringify(["productRentalCount:desc"]), // 👈 nếu muốn lấy sản phẩm được thuê nhiều
+  });
 
-  try {
-    const res = await fetch(
-      `http://127.0.0.1:1337/api/products?populate=*`,
-      option
-    );
-    const response = await res.json();
-    return response;
-  } catch (err) {
-    console.error(err);
-  }
-}
+  const res = await fetch(`http://localhost:1337/api/products?${query}`);
+  const data = await res.json();
+  return data;
+};

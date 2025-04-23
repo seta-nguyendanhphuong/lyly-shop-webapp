@@ -215,10 +215,10 @@ export default function Home() {
       {renderBanner()}
       <div className="min-h-[900px] w-full max-w-[1440px] mx-auto">
         <div className="w-[81%] mx-auto">
-          {renderSponsor()}
-          <AdvertisementBanner />
+          {/* <AdvertisementBanner /> */}
           {renderTypeProduct("Sản phẩm được thuê nhiều")}
           {renderProducts()}
+          {renderSponsor()}
         </div>
       </div>
 

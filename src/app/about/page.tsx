@@ -1,5 +1,4 @@
 import React from "react";
-import avaImage from "../../../public/images/ava.jpg";
 
 export default function About() {
   return (
@@ -9,11 +8,11 @@ export default function About() {
         <main className="container mx-auto py-12 px-4">
           {/* Mission Statement */}
           <section className="mb-16">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl font-bold text-red-700 mb-6">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl font-bold text-red-700 mb-6 text-center">
                 Nhiệm vụ của chúng tôi
               </h2>
-              <p className="text-lg text-gray-700 mb-8">
+              <p className="text-lg text-gray-700 mb-8 ">
                 Sứ mệnh của chúng tôi là cung cấp dịch vụ cho thuê trang phục
                 biểu diễn chất lượng, đa dạng và phù hợp với mọi loại hình nghệ
                 thuật.
@@ -98,17 +97,8 @@ export default function About() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden">
-                  <img src={avaImage} className="w-full h-full object-cover" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800">
-                  Chủ Shop Xinh Dep
-                </h3>
-                <p className="text-gray-600">Nguyen Huong Ly</p>
-              </div>
-              <div className="text-center">
-                <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden">
                   <img
-                    src="../../../public/images/ava.jpg"
+                    src="/images/ava.jpg"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -120,7 +110,19 @@ export default function About() {
               <div className="text-center">
                 <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden">
                   <img
-                    src="/api/placeholder/200/200"
+                    src="/images/ava.jpg"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800">
+                  Chủ Shop Xinh Dep
+                </h3>
+                <p className="text-gray-600">Nguyen Huong Ly</p>
+              </div>
+              <div className="text-center">
+                <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden">
+                  <img
+                    src="/images/ava.jpg"
                     className="w-full h-full object-cover"
                   />
                 </div>
