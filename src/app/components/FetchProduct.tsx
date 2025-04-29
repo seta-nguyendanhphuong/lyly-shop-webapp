@@ -78,7 +78,7 @@ export async function fetchProductHome() {
 
   try {
     const res = await fetch(
-      `http://127.0.0.1:1337/api/products?populate=*`,
+      `http://127.0.0.1:1337/api/products/?populate=*`,
       option
     );
     const response = await res.json();

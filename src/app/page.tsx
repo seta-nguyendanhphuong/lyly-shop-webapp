@@ -12,10 +12,13 @@ import AdvertisementBanner from "./components/AdvertisementBanner";
 import { fetchProductHome } from "@/app/components/FetchProduct";
 import Link from "next/link";
 import { Product } from "@/app/types/product";
+import Slideshow from "./components/SildeShow";
 
 export default function Home() {
   const [listProduct, setListProduct] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+
+  console.log(listProduct);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -75,7 +78,7 @@ export default function Home() {
 
     return (
       <div className="grid xl:grid-cols-4 gap-[20px] lg:grid-cols-3 grid-cols-2">
-        {listProduct.map((product) => (
+        {listProduct?.slice(0, 8).map((product) => (
           <ProductCard
             key={product.id}
             id={product.id}
@@ -213,10 +216,11 @@ export default function Home() {
   return (
     <div>
       {renderBanner()}
+      <Slideshow />
       <div className="min-h-[900px] w-full max-w-[1440px] mx-auto">
-        <div className="w-[81%] mx-auto">
-          {renderSponsor()}
+        <div className="w-[81%] mx-auto pt-10">
           <AdvertisementBanner />
+          {renderSponsor()}
           {renderTypeProduct("Sản phẩm được thuê nhiều")}
           {renderProducts()}
         </div>
