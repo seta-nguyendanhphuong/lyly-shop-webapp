@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
-  { id: 1, url: "https://source.unsplash.com/random/800x400?1" },
-  { id: 2, url: "https://source.unsplash.com/random/800x400?2" },
-  { id: 3, url: "https://source.unsplash.com/random/800x400?3" },
+  { id: 1, url: "https://picsum.photos/800/400?1" },
+  { id: 2, url: "https://picsum.photos/800/400?2" },
+  { id: 3, url: "https://picsum.photos/800/400?3" },
 ];
 
 const Slideshow = () => {

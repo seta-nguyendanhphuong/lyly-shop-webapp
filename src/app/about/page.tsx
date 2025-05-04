@@ -88,7 +88,7 @@ export default function About() {
             <h2 className="text-3xl font-bold text-center text-red-700 mb-10">
               Thành viên của chúng tôi
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="text-center">
                 <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden">
                   <img
@@ -97,9 +97,9 @@ export default function About() {
                   />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800">
-                  Chủ Shop Xinh Dep
+                  Chủ cửa hàng
                 </h3>
-                <p className="text-gray-600">Nguyen Huong Ly</p>
+                <p className="text-gray-600">Nguyen Hương Ly</p>
               </div>
               <div className="text-center">
                 <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden">
@@ -108,22 +108,8 @@ export default function About() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800">
-                  Chủ Shop Xinh Dep
-                </h3>
-                <p className="text-gray-600">Nguyen Huong Ly</p>
-              </div>
-              <div className="text-center">
-                <div className="w-48 h-48 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden">
-                  <img
-                    src={"/images/ava.jpg"}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800">
-                  Nguyen Huong Ly
-                </h3>
-                <p className="text-gray-600">Nguyen Huong Ly</p>
+                <h3 className="text-xl font-bold text-gray-800">Admin/CSKH</h3>
+                <p className="text-gray-600">Nguyễn Danh Phương</p>
               </div>
             </div>
           </section>
@@ -181,9 +167,7 @@ export default function About() {
                   <h3 className="text-xl font-bold text-gray-800 mb-2">
                     Trang phục doanh nghiệp đa dạng
                   </h3>
-                  <p className="text-gray-600 mb-4">
-                    Nhà e
-                  </p>
+                  <p className="text-gray-600 mb-4">Nhà e</p>
                   <a
                     href="#"
                     className="text-red-700 font-semibold hover:underline"

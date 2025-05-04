@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Banner from "./components/common/Banner";
-import BannerImageSrc from "../../public/images/lyly_banner.jpg";
+import BannerImageSrc from "../../public/images/lyly_banner1.jpg";
 import ProductCard from "./components/ProductCard";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { IoChatbubblesOutline } from "react-icons/io5";
@@ -121,7 +121,7 @@ export default function Home() {
 
           <div>
             <img
-              src="https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png"
+              src="https://thcs-doanthidiem.edu.vn/site/upload/generals/vietsmart_logo.jpg  "
               alt=""
               width={"65px"}
             />
@@ -216,7 +216,7 @@ export default function Home() {
   return (
     <div>
       {renderBanner()}
-      <Slideshow />
+      {/* <Slideshow /> */}
       <div className="min-h-[900px] w-full max-w-[1440px] mx-auto">
         <div className="w-[81%] mx-auto pt-10">
           <AdvertisementBanner />
