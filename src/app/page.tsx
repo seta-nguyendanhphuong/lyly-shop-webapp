@@ -1,8 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Banner from "./components/common/Banner";
-import BannerImageSrc from "../../public/images/lyly_banner.jpg";
+import BannerImageSrc from "../../public/images/lyly_banner1.jpg";
 import ProductCard from "./components/ProductCard";
 import { CiDeliveryTruck } from "react-icons/ci";
 import { IoChatbubblesOutline } from "react-icons/io5";
@@ -16,7 +15,6 @@ import { Product } from "@/app/types/product";
 export default function Home() {
   const [listProduct, setListProduct] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const loadProducts = async () => {
       try {
@@ -47,6 +45,53 @@ export default function Home() {
     return <Banner imgSrc={BannerImageSrc.src} />;
   };
 
+  const renderPopularCategory = () => {
+    const fashionTypes = [
+      {
+        name: "Áo Dài",
+        url: "/images/popu_cate1.jpg",
+      },
+      {
+        name: "Dân Gian",
+        url: "/images/popu_cate2.jpg",
+      },
+      {
+        name: "Váy Bồng",
+        url: "/images/popu_cate3.jpg",
+      },
+    ];
+
+    return (
+      <div className="grid grid-cols-3 gap-4 h-[250px]">
+        {fashionTypes.map((type, index) => (
+          <div
+            key={index}
+            className="relative h-full flex items-center justify-center group rounded-lg cursor-pointer overflow-hidden"
+          >
+            {/* Background image layer with blur */}
+            <div
+              className="absolute inset-0 bg-cover bg-top"
+              style={{ backgroundImage: `url('${type.url}')` }}
+            />
+
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/40" />
+
+            {/* Content layer */}
+            <div className="relative z-10 text-white text-center w-full h-full flex justify-center items-end pb-10">
+              <span className="text-2xl font-semibold block">{type.name}</span>
+              <Link href="/product">
+                <span className="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-lg text-blue-200">
+                  Xem thêm
+                </span>
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   const renderTypeProduct = (type: string) => {
     return (
       <div className="flex justify-between items-center pt-[30px] pb-[20px]">
@@ -75,7 +120,7 @@ export default function Home() {
 
     return (
       <div className="grid xl:grid-cols-4 gap-[20px] lg:grid-cols-3 grid-cols-2">
-        {listProduct.map((product) => (
+        {listProduct?.slice(0, 8).map((product) => (
           <ProductCard
             key={product.id}
             id={product.id}
@@ -94,75 +139,30 @@ export default function Home() {
   };
 
   const renderSponsor = () => {
+    const sponsorImages = [
+      "https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png",
+      "https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG",
+      "https://thcs-doanthidiem.edu.vn/site/upload/generals/vietsmart_logo.jpg",
+      "https://www.vnu.edu.vn/upload/2015/01/17449/image/Logo-VNU-1995.png",
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/LogoUTC.jpg/500px-LogoUTC.jpg",
+      "https://i3.connections.vn/huc.edu.vn/img/logo/logohuc.png?fit=194,200&quality=100&pv=29",
+      "https://mariecuriehanoischool.com/images/GIAOVU/logo-MC-anh.jpg",
+      "https://cdn.haitrieu.com/wp-content/uploads/2021/12/Logo-DH-San-Khau-Dien-Anh-Ha-Noi-SKDA-Wh.png",
+    ];
     return (
-      <div className="min-h-[100px] py-14">
+      <div className="min-h-[100px] py-10">
         <h1 className="text-center pb-10 text-2xl font-bold text-[#003459]">
           Proud to sponsor for{" "}
         </h1>
         <div className="flex w-[81%] mx-auto justify-around items-stretch">
-          <div>
-            <img
-              src="https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png"
-              alt=""
-              width={"65px"}
-            />
-          </div>
-
-          <div>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG"
-              alt=""
-              width={"65px"}
-            />
-          </div>
-
-          <div>
-            <img
-              src="https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png"
-              alt=""
-              width={"65px"}
-            />
-          </div>
-
-          <div>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG"
-              alt=""
-              width={"65px"}
-            />
-          </div>
-
-          <div>
-            <img
-              src="https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png"
-              alt=""
-              width={"65px"}
-            />
-          </div>
-
-          <div>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG"
-              alt=""
-              width={"65px"}
-            />
-          </div>
-
-          <div>
-            <img
-              src="https://ntthnue.edu.vn/uploads/Images/2023/V3/Logo_Web_Bo%20tr%E1%BA%AFng.png"
-              alt=""
-              width={"65px"}
-            />
-          </div>
-
-          <div>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/vi/3/30/Logo-NEU.PNG"
-              alt=""
-              width={"65px"}
-            />
-          </div>
+          {sponsorImages.map((e, i) => (
+            <div
+              key={i}
+              className="transition-transform duration-300 transform hover:-translate-y-2"
+            >
+              <img src={e} alt="" width={"65px"} />
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -213,10 +213,20 @@ export default function Home() {
   return (
     <div>
       {renderBanner()}
+      {/* <Slideshow /> */}
       <div className="min-h-[900px] w-full max-w-[1440px] mx-auto">
-        <div className="w-[81%] mx-auto">
+        <div className="w-[81%] mx-auto pt-5">
           {renderSponsor()}
-          <AdvertisementBanner />
+          <AdvertisementBanner
+            discount={50}
+            advertiseImage={
+              "https://images.pexels.com/photos/5622859/pexels-photo-5622859.jpeg?auto=compress&cs=tinysrgb&w=1200"
+            }
+            startDate="30/04"
+            endDate="01/05"
+          />
+          {renderTypeProduct("Loại sản phẩm nổi bật")}
+          {renderPopularCategory()}
           {renderTypeProduct("Sản phẩm được thuê nhiều")}
           {renderProducts()}
         </div>
@@ -225,7 +235,6 @@ export default function Home() {
       <div className="min-h-[200px] w-full max-w-[1440px] mx-auto">
         <div className="w-[81%] mx-auto">
           {/* {renderTypeProduct("Sản phẩm của chúng tôi")} */}
-          {/* {renderProducts()} */}
           {/* {renderProducts()} */}
           {renderService()}
         </div>
