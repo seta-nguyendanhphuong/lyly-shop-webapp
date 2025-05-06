@@ -27,11 +27,11 @@ export default function Banner({ imgSrc }: BannerProps) {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="w-full h-[450px] overflow-hidden relative group">
+    <div className="w-full h-[550px] overflow-hidden relative group">
       <img
         src={slides[currentIndex].url}
         alt={`Slide ${currentIndex + 1}`}
-        className="w-full h-[450px] object-cover transition duration-700 ease-in-out"
+        className="w-full h-full object-cover transition duration-700 ease-in-out"
       />
 
       <button

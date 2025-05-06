@@ -1,5 +1,4 @@
 import React from "react";
-import avaImage from "../../../public/images/ava.jpg";
 
 export default function About() {
   return (
